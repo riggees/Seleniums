@@ -3,11 +3,11 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test name="Test(failed)">
     <classes>
-      <class name="seleniums.HomePageTest">
+      <class name="seleniums.FormPageTest">
         <methods>
-          <include name="homeSubmit"/>
+          <include name="formSubmitTest"/>
         </methods>
-      </class> <!-- seleniums.HomePageTest -->
+      </class> <!-- seleniums.FormPageTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

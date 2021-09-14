@@ -22,10 +22,8 @@ public class Setup {
 	public Setup(){
 		try {
 			prop = new Properties();
-			FileInputStream ip = new FileInputStream(System.getProperty("user.dir")+ "/src/main/java"
-					+ "/configData/config.properties");
-			System.out.println(System.getProperty("user.dir")+ "/src/main/java"
-					+ "/configData/config.properties");
+			FileInputStream ip = new FileInputStream(System.getProperty(AppUtils.USER_DIR)+ AppUtils.CONFIG_PATH);
+			System.out.println(System.getProperty(AppUtils.USER_DIR)+ AppUtils.CONFIG_PATH);
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
