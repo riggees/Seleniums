@@ -5,7 +5,7 @@
     <classes>
       <class name="seleniums.FormPageTest">
         <methods>
-          <include name="formSubmitTest"/>
+          <include name="formTest"/>
         </methods>
       </class> <!-- seleniums.FormPageTest -->
     </classes>

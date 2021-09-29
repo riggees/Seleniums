@@ -45,7 +45,7 @@ public class ExcelUtils {
 		                break;
 		                default:
 		        }
-				System.out.println(data[i][k]);
+				System.out.println(data[i][k]+" "+i+" "+k);
 			}
 		}
 		return data;
@@ -56,9 +56,7 @@ public class ExcelUtils {
 		Workbook wb=WorkbookFactory.create(fis);
 		Sheet sh=wb.getSheet(sheetname);
 		Row rw=sh.getRow(rownum);
-		
 	    String data=rw.getCell(colnum).getStringCellValue();
-		System.out.println("come1");
 	    return data;
 		}
 	public int countofdata(String filepath,String sheetname) throws EncryptedDocumentException, InvalidFormatException, IOException{

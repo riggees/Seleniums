@@ -11,8 +11,17 @@ public class FormPageTest {
 
 	FormPage formPage;
 	ExcelUtils eUtils;
+	
+	@Test
+	public void formTest() {
+		formPage = new FormPage();
+		Object data[][] = ExcelUtils.getTestData(System.getProperty(AppUtils.USER_DIR) + AppUtils.EXCEL_PATH, "in");
+		formPage.formSubmit(data);
+		
+	}
 
-	@DataProvider (name = "data-provider")
+	
+	/*@DataProvider (name = "data-provider")
 	public Object[][] getFormTestData() {
 		Object data[][] = ExcelUtils.getTestData(System.getProperty(AppUtils.USER_DIR) + AppUtils.EXCEL_PATH, "in");
 		System.out.println(data[0][0]+"in getformtestdata");
@@ -24,9 +33,10 @@ public class FormPageTest {
 			String Company, String Address1, String Address2, String City, String Code, String Phone) {
 		System.out.println(id + "formSubmitTest" +EmailID + Lastname);
 		formPage = new FormPage();
+		//formPage.formSubmit();
 		//Object[][] formData = ExcelUtils.getTestData(System.getProperty(AppUtils.USER_DIR) + AppUtils.EXCEL_PATH, "in");
 
-	}
+	}*/
 
 	
 }

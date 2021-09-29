@@ -1,14 +1,24 @@
 package pages;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.util.SystemOutLogger;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import setup.Setup;
+import utils.Screenshot;
 
 public class LoginPage extends Setup{
 	
@@ -24,6 +34,10 @@ public class LoginPage extends Setup{
 	@CacheLookup
 	WebElement submit;
 	
+	@FindBy(css = "div[class*='alert']")
+	@CacheLookup
+	WebElement alert;
+	
 	public LoginPage() {
 		PageFactory.initElements(driver, this);
 	}
@@ -32,9 +46,16 @@ public class LoginPage extends Setup{
 		emailAddress.sendKeys(emailID);
 	}
 	
-	public void submitEmail() {
+	public String submitEmail() {
 		if (multiSubmit.size() != 0) {
 			submit.click();
+		}
+		WebDriverWait wait = new WebDriverWait (driver, 10);
+		wait.until(ExpectedConditions.visibilityOf(alert));
+		if(alert.isDisplayed()) {
+			return "fail";
+		}else {
+			return "Pass";
 		}
 		
 		

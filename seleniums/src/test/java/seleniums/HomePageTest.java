@@ -12,7 +12,6 @@ public class HomePageTest extends Setup{
 	@Test //(groups= "homepage", dependsOnMethods={"testAdd", "testDivide"})
 	public void homeSubmit() {
 		initialization();
-		System.out.println(prop.getProperty("website"));
 		driver.get(prop.getProperty("website"));
 		if(driver.getTitle().contains("508")) {
 			System.out.println("error in home form");

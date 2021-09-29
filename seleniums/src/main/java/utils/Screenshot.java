@@ -7,6 +7,7 @@ import java.util.Calendar;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -15,6 +16,18 @@ import org.testng.ITestResult;
 import setup.Setup;
 
 public class Screenshot extends Setup implements ITestListener{
+	
+	public void TakeScreenshot() {
+		TakesScreenshot scrShot =((TakesScreenshot)driver);
+		File errorshot = scrShot.getScreenshotAs(OutputType.FILE);
+		try {
+			FileUtils.copyFile(errorshot, new File("./Screenshots/Screen.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
