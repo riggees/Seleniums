@@ -34,7 +34,17 @@ public class ExcelUtils {
 		Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
 		for (int i = 0; i < sheet.getLastRowNum(); i++) {
 			for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
-				data[i][k] = sheet.getRow(i).getCell(k).toString();
+				Cell c= sheet.getRow(i+1).getCell(k);
+				switch (c.getCellType())
+		        {
+		            case Cell.CELL_TYPE_STRING:    //field that represents string cell type
+		            	data[i][k] = sheet.getRow(i+1).getCell(k).getStringCellValue();
+		                break;
+		            case Cell.CELL_TYPE_NUMERIC:    //field that represents number cell type            
+		            	data[i][k] =(long) sheet.getRow(i+1).getCell(k).getNumericCellValue()+"";
+		                break;
+		                default:
+		        }
 				System.out.println(data[i][k]);
 			}
 		}

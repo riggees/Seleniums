@@ -1,7 +1,5 @@
 package seleniums;
 
-import java.util.Properties;
-
 import org.testng.annotations.Test;
 
 import pages.HomePage;
@@ -16,6 +14,12 @@ public class HomePageTest extends Setup{
 		initialization();
 		System.out.println(prop.getProperty("website"));
 		driver.get(prop.getProperty("website"));
+		if(driver.getTitle().contains("508")) {
+			System.out.println("error in home form");
+			driver.navigate().refresh();
+			//driver.get(driver.getCurrentUrl()); //driver.navigate().to(driver.getCurrentUrl());
+			//driver.findElement(By textboxLocator).sendKeys(Keys.F5); driver.findElement(By textboxLocator).sendKeys("\uE035");
+		}
 		homepage = new HomePage();
 		homepage.clickSignIn();
 	}

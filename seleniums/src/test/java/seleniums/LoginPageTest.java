@@ -20,6 +20,10 @@ public class LoginPageTest extends Setup{
 	
 	@Test //(dependsOnGroups= {"homepage","database"},groups= "loginpage", alwaysRun=true)
 	public void loginTest() throws EncryptedDocumentException, InvalidFormatException, IOException {
+		if(driver.getTitle().contains("508")) {
+			System.out.println("error in login form");
+			driver.get(driver.getCurrentUrl());
+		}
 		login = new LoginPage();
 		utils = new ExcelUtils();
 		String emailID = utils.getExceldata(System.getProperty(AppUtils.USER_DIR)+AppUtils.EXCEL_PATH,"in",1,1);
