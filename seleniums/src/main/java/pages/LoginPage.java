@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import setup.Setup;
+import utils.AppUtils;
 import utils.Screenshot;
 
 public class LoginPage extends Setup{
@@ -51,11 +52,11 @@ public class LoginPage extends Setup{
 			submit.click();
 		}
 		WebDriverWait wait = new WebDriverWait (driver, 10);
-		wait.until(ExpectedConditions.visibilityOf(alert));
-		if(alert.isDisplayed()) {
-			return "fail";
+		boolean isVisible = wait.until(ExpectedConditions.invisibilityOf(alert));
+		if (isVisible){
+			return AppUtils.FAIL;
 		}else {
-			return "Pass";
+			return AppUtils.PASS;
 		}
 		
 		

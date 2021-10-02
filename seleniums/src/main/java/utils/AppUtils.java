@@ -15,8 +15,10 @@ public class AppUtils extends Setup {
 	public static final String USER_DIR = "user.dir";
 	public static final String CONFIG_PATH = "\\src\\main\\java\\configData\\config.properties";
 	public static final String EXCEL_PATH = "\\src\\main\\java\\testData\\TestData.xlsx";
+	public static final String PASS= "PASS";
+	public static final String FAIL = "FAIL";
 	
-	public void TakeScreenshot() {
+	public static void TakeScreenshot() {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		String currentDir = System.getProperty("user.dir");
 		try {
@@ -25,5 +27,31 @@ public class AppUtils extends Setup {
 			e.printStackTrace();
 		}
 	}
+	public static String getAlphaNumericString(int n)
+    {
+  
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    + "0123456789"
+                                    + "abcdefghijklmnopqrstuvxyz";
+  
+        // create StringBuffer size of AlphaNumericString
+        StringBuilder sb = new StringBuilder(n);
+  
+        for (int i = 0; i < n; i++) {
+  
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index
+                = (int)(AlphaNumericString.length()
+                        * Math.random());
+  
+            // add Character one by one in end of sb
+            sb.append(AlphaNumericString
+                          .charAt(index));
+        }
+  
+        return sb.toString();
+    }
 	
 }
