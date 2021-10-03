@@ -123,6 +123,38 @@ public class FormPage extends Setup{
 	@CacheLookup
 	WebElement previous;
 	
+	@FindBy(xpath = "//*[text()='Add to cart']")
+	@CacheLookup
+	WebElement addToCart;
+	
+	@FindBy(xpath = "//*[contains(text(),'checkout')]")
+	@CacheLookup
+	WebElement checkOut;
+	
+	@FindBy(css = "div[class='shopping_cart']>a")
+	@CacheLookup
+	WebElement cart;
+	
+	@FindBy(css = "p[class^='cart_navigat']>a")
+	@CacheLookup
+	WebElement finalCheckout;
+	
+	@FindBy(css = "div[id^='uniform-cgv']")
+	@CacheLookup
+	WebElement terms;
+	
+	@FindBy(css = "div[id='HOOK_PAYMENT']>div>div")
+	@CacheLookup
+	WebElement payByWire;
+	
+	@FindBy(css = "//*[contains(text(),'my order')]")
+	@CacheLookup
+	WebElement confirmMyOrder;
+	
+	@FindBy(css = "a[class='logout']")
+	@CacheLookup
+	WebElement logout;
+	
 	public FormPage() {
 		PageFactory.initElements(driver,this);
 	}
@@ -192,17 +224,16 @@ public class FormPage extends Setup{
 		}
 	    
 		
-		  try { r = new Robot(); r.keyPress(KeyEvent.VK_CONTROL);
-		  r.keyPress(KeyEvent.VK_SHIFT); r.keyPress(KeyEvent.VK_TAB);
-		  r.keyRelease(KeyEvent.VK_TAB); r.keyRelease(KeyEvent.VK_SHIFT);
-		  r.keyRelease(KeyEvent.VK_CONTROL); } catch (AWTException e) { 
-		  e.printStackTrace(); }
-		 
-	    
+		  
+	    synchronized (action){
+	        try{
+	           action.wait(5000);
+	        } catch (InterruptedException e) {
+	           e.printStackTrace();
+	        }
+	     }
 	 
 		Set<String>s=driver.getWindowHandles();
-		int a =s.size();
-		System.out.println(a +"a");
 		Iterator<String> I1= s.iterator();
 
 		while(I1.hasNext())
@@ -211,17 +242,36 @@ public class FormPage extends Setup{
 		String child=I1.next();
 		System.out.println(child + "child");
 
-
-		
-		/*
-		 * wait.until(ExpectedConditions.visibilityOf(viewLarger)); viewLarger.click();
-		 * wait.until(ExpectedConditions.visibilityOf(next)); next.click();
-		 * previous.click(); action.moveByOffset(187, 176).click().perform();
-		 */
+		if (!parent.equalsIgnoreCase(child)) {
+            driver.switchTo().window(child);
 		}
-		String chill=driver.getWindowHandle();
-		System.out.println(chill + "chill");	
-		//driver.switchTo().window(parent);
-		
+		}
+		js.executeScript("window.scrollBy(0,500)", "");
+		wait.until(ExpectedConditions.visibilityOf(viewLarger)); viewLarger.click();
+		wait.until(ExpectedConditions.visibilityOf(next)); next.click();
+		previous.click(); action.moveByOffset(50, 50).click().perform();
+		wait.until(ExpectedConditions.elementToBeClickable(addToCart));
+		addToCart.click();
+		wait.until(ExpectedConditions.elementToBeClickable(checkOut));
+		checkOut.click();
+		 driver.switchTo().window(parent);
+		js.executeScript("arguments[0].scrollIntoView();", cart);
+		cart.click();
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		wait.until(ExpectedConditions.elementToBeClickable(finalCheckout));
+		finalCheckout.click();
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		wait.until(ExpectedConditions.elementToBeClickable(finalCheckout));
+		finalCheckout.click();
+		wait.until(ExpectedConditions.elementToBeClickable(terms));
+		terms.click();
+		wait.until(ExpectedConditions.elementToBeClickable(finalCheckout));
+		finalCheckout.click();
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		payByWire.click();
+		js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		confirmMyOrder.click();
+		js.executeScript("arguments[0].scrollIntoView();", logout);
+		logout.click();
 	}
 }

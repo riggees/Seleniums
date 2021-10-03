@@ -25,13 +25,14 @@ public class LoginPageTest extends Setup{
 		}
 		login = new LoginPage();
 		excelUtils = new ExcelUtils();
+		String parent=driver.getWindowHandle();		System.out.println(parent + "loginpage");
 		//String emailID = utils.getExceldata(System.getProperty(AppUtils.USER_DIR)+AppUtils.EXCEL_PATH,"in",1,1);
 		String generatedString = AppUtils.getAlphaNumericString(8);
 	    System.out.println(generatedString);
 		login.enterEmail(generatedString+"@test.com");
 		String result = login.submitEmail();
 		if (result == AppUtils.FAIL) {
-			AppUtils.TakeScreenshot();
+			//AppUtils.TakeScreenshot();
 	
 		}
 	}
